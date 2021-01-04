@@ -1,0 +1,7 @@
+version: 2
+endpoint: https://sf.asiatech.dev
+admin_secret: 7'8e=y;%H,j'!>~`xW'dq2<5<
+metadata_directory: metadata
+actions:
+  kind: synchronous
+  handler_webhook_baseurl: http://localhost:3000

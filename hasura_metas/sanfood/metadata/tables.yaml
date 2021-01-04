@@ -1,0 +1,1431 @@
+- table:
+    schema: public
+    name: accounts
+  object_relationships:
+  - name: user
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: users
+        column_mapping:
+          user_id: account_id
+  insert_permissions:
+  - role: exec
+    permission:
+      check: {}
+      columns:
+      - user_id
+      - role
+      - email
+      - last_login
+      backend_only: false
+  - role: staff
+    permission:
+      check: {}
+      columns:
+      - email
+      - role
+      - user_id
+      - last_login
+      backend_only: false
+  select_permissions:
+  - role: acrfixed
+    permission:
+      columns:
+      - email
+      - role
+      - user_id
+      - last_login
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  - role: acrleader
+    permission:
+      columns:
+      - email
+      - last_login
+      - role
+      - user_id
+      filter:
+        _or:
+        - user_id:
+            _eq: X-Hasura-User-Id
+        - role:
+            _eq: acrmobile
+        - role:
+            _eq: acrfixed
+      allow_aggregations: true
+  - role: acrmobile
+    permission:
+      columns:
+      - email
+      - role
+      - user_id
+      - last_login
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  - role: anonymous
+    permission:
+      columns: []
+      filter: {}
+  - role: asm
+    permission:
+      columns:
+      - email
+      - role
+      - user_id
+      - last_login
+      filter:
+        _or:
+        - user_id:
+            _eq: X-Hasura-User-Id
+        - role:
+            _eq: acrleader
+        - role:
+            _eq: acrmobile
+        - role:
+            _eq: acrfixed
+      allow_aggregations: true
+  - role: exec
+    permission:
+      columns:
+      - email
+      - role
+      - user_id
+      - last_login
+      filter: {}
+      allow_aggregations: true
+  - role: staff
+    permission:
+      columns:
+      - email
+      - role
+      - user_id
+      - last_login
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: exec
+    permission:
+      columns:
+      - last_login
+      - role
+      filter: {}
+      check: {}
+  - role: staff
+    permission:
+      columns:
+      - last_login
+      - role
+      filter: {}
+      check: {}
+  delete_permissions:
+  - role: exec
+    permission:
+      filter: {}
+  - role: staff
+    permission:
+      filter: {}
+  event_triggers:
+  - name: on_account_delete
+    definition:
+      enable_manual: false
+      delete:
+        columns: '*'
+    retry_conf:
+      num_retries: 2
+      interval_sec: 10
+      timeout_sec: 60
+    webhook: https://rqro7i1kfd.execute-api.ap-southeast-1.amazonaws.com/prod/disable
+    headers:
+    - value: xDuUlCqCtw7DLdNtdEwqx5pnzmH5uYAo3EuwJvdv
+      name: X-Api-Key
+  - name: on_account_update
+    definition:
+      enable_manual: false
+      update:
+        columns:
+        - role
+    retry_conf:
+      num_retries: 2
+      interval_sec: 10
+      timeout_sec: 60
+    webhook: https://rqro7i1kfd.execute-api.ap-southeast-1.amazonaws.com/prod/update
+    headers:
+    - value: xDuUlCqCtw7DLdNtdEwqx5pnzmH5uYAo3EuwJvdv
+      name: X-Api-Key
+- table:
+    schema: public
+    name: attendance_config
+- table:
+    schema: public
+    name: attendance_records
+- table:
+    schema: public
+    name: branches
+  object_relationships:
+  - name: distributor
+    using:
+      foreign_key_constraint_on: distributor_id
+  - name: inventory
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: inventories
+        column_mapping:
+          id: branch_id
+  - name: location
+    using:
+      foreign_key_constraint_on: location_id
+  - name: marketing_region
+    using:
+      foreign_key_constraint_on: area_id
+- table:
+    schema: public
+    name: contracts
+  object_relationships:
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
+  array_relationships:
+  - name: users
+    using:
+      foreign_key_constraint_on:
+        column: contract_id
+        table:
+          schema: public
+          name: users
+- table:
+    schema: public
+    name: distributors
+  object_relationships:
+  - name: marketing_region
+    using:
+      foreign_key_constraint_on: area_id
+  array_relationships:
+  - name: branches
+    using:
+      foreign_key_constraint_on:
+        column: distributor_id
+        table:
+          schema: public
+          name: branches
+  - name: mate_stores
+    using:
+      foreign_key_constraint_on:
+        column: supplier_id
+        table:
+          schema: public
+          name: mate_stores
+- table:
+    schema: public
+    name: distro_store_assignments
+  object_relationships:
+  - name: branch
+    using:
+      foreign_key_constraint_on: branch_id
+  - name: mate_store
+    using:
+      foreign_key_constraint_on: mate_store_id
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
+  insert_permissions:
+  - role: exec
+    permission:
+      check: {}
+      columns:
+      - branch_id
+      - id
+      - mate_store_id
+      - user_id
+      backend_only: false
+  select_permissions:
+  - role: acrfixed
+    permission:
+      columns:
+      - branch_id
+      - id
+      - mate_store_id
+      - user_id
+      filter:
+        user:
+          account_id:
+            _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  - role: acrleader
+    permission:
+      columns:
+      - branch_id
+      - id
+      - mate_store_id
+      - user_id
+      filter: {}
+  - role: asm
+    permission:
+      columns:
+      - id
+      - branch_id
+      - mate_store_id
+      - user_id
+      filter: {}
+- table:
+    schema: public
+    name: inventories
+  object_relationships:
+  - name: branch
+    using:
+      foreign_key_constraint_on: branch_id
+  - name: mate_store
+    using:
+      foreign_key_constraint_on: id
+  - name: product
+    using:
+      foreign_key_constraint_on: product_id
+- table:
+    schema: public
+    name: locations
+  array_relationships:
+  - name: branches
+    using:
+      foreign_key_constraint_on:
+        column: location_id
+        table:
+          schema: public
+          name: branches
+  - name: mate_stores
+    using:
+      foreign_key_constraint_on:
+        column: location_id
+        table:
+          schema: public
+          name: mate_stores
+- table:
+    schema: public
+    name: marketing_regions
+  array_relationships:
+  - name: branches
+    using:
+      foreign_key_constraint_on:
+        column: area_id
+        table:
+          schema: public
+          name: branches
+  - name: distributors
+    using:
+      foreign_key_constraint_on:
+        column: area_id
+        table:
+          schema: public
+          name: distributors
+- table:
+    schema: public
+    name: mate_stores
+  object_relationships:
+  - name: assignment
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: distro_store_assignments
+        column_mapping:
+          id: mate_store_id
+  - name: location
+    using:
+      foreign_key_constraint_on: location_id
+  - name: supplier
+    using:
+      foreign_key_constraint_on: supplier_id
+  array_relationships:
+  - name: inventories
+    using:
+      foreign_key_constraint_on:
+        column: id
+        table:
+          schema: public
+          name: inventories
+- table:
+    schema: public
+    name: product_categories
+  array_relationships:
+  - name: products
+    using:
+      foreign_key_constraint_on:
+        column: category_id
+        table:
+          schema: public
+          name: products
+- table:
+    schema: public
+    name: product_packagings
+  array_relationships:
+  - name: products
+    using:
+      foreign_key_constraint_on:
+        column: packaging_id
+        table:
+          schema: public
+          name: products
+  insert_permissions:
+  - role: exec
+    permission:
+      check: {}
+      columns:
+      - notes
+      - unit
+      - id
+      backend_only: false
+  - role: staff
+    permission:
+      check: {}
+      columns:
+      - notes
+      - unit
+      backend_only: false
+  select_permissions:
+  - role: acrfixed
+    permission:
+      columns:
+      - id
+      - unit
+      - notes
+      filter: {}
+  - role: acrleader
+    permission:
+      columns:
+      - notes
+      - unit
+      - id
+      filter: {}
+  - role: acrmobile
+    permission:
+      columns:
+      - notes
+      - unit
+      - id
+      filter: {}
+  - role: asm
+    permission:
+      columns:
+      - notes
+      - unit
+      - id
+      filter: {}
+  - role: exec
+    permission:
+      columns:
+      - notes
+      - unit
+      - id
+      filter: {}
+      allow_aggregations: true
+  - role: staff
+    permission:
+      columns:
+      - notes
+      - unit
+      - id
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: exec
+    permission:
+      columns:
+      - notes
+      - unit
+      filter: {}
+      check: {}
+  - role: staff
+    permission:
+      columns:
+      - notes
+      - unit
+      filter: {}
+      check: {}
+- table:
+    schema: public
+    name: product_pictures
+  object_relationships:
+  - name: product
+    using:
+      foreign_key_constraint_on: product_id
+  insert_permissions:
+  - role: exec
+    permission:
+      check: {}
+      columns:
+      - expiry
+      - picture
+      - product_id
+      backend_only: false
+  - role: staff
+    permission:
+      check: {}
+      columns:
+      - expiry
+      - picture
+      - product_id
+      backend_only: false
+  select_permissions:
+  - role: acrfixed
+    permission:
+      columns:
+      - id
+      - picture
+      - expiry
+      - product_id
+      filter: {}
+      allow_aggregations: true
+  - role: acrleader
+    permission:
+      columns:
+      - expiry
+      - picture
+      - id
+      - product_id
+      filter: {}
+      allow_aggregations: true
+  - role: acrmobile
+    permission:
+      columns:
+      - expiry
+      - picture
+      - id
+      - product_id
+      filter: {}
+      allow_aggregations: true
+  - role: asm
+    permission:
+      columns:
+      - expiry
+      - picture
+      - id
+      - product_id
+      filter: {}
+      allow_aggregations: true
+  - role: exec
+    permission:
+      columns:
+      - expiry
+      - picture
+      - id
+      - product_id
+      filter: {}
+  - role: staff
+    permission:
+      columns:
+      - expiry
+      - picture
+      - id
+      - product_id
+      filter: {}
+  update_permissions:
+  - role: exec
+    permission:
+      columns:
+      - expiry
+      - picture
+      filter: {}
+      check: null
+  - role: staff
+    permission:
+      columns:
+      - expiry
+      - picture
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: exec
+    permission:
+      filter: {}
+  - role: staff
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: products
+  object_relationships:
+  - name: product_category
+    using:
+      foreign_key_constraint_on: category_id
+  - name: product_packaging
+    using:
+      foreign_key_constraint_on: packaging_id
+  array_relationships:
+  - name: inventories
+    using:
+      foreign_key_constraint_on:
+        column: product_id
+        table:
+          schema: public
+          name: inventories
+  - name: product_pictures
+    using:
+      foreign_key_constraint_on:
+        column: product_id
+        table:
+          schema: public
+          name: product_pictures
+  insert_permissions:
+  - role: exec
+    permission:
+      check: {}
+      columns:
+      - name
+      - product_code
+      - variant
+      backend_only: false
+  - role: staff
+    permission:
+      check: {}
+      columns:
+      - name
+      - product_code
+      - variant
+      backend_only: false
+  select_permissions:
+  - role: acrfixed
+    permission:
+      columns:
+      - id
+      - name
+      - product_code
+      - variant
+      filter: {}
+      allow_aggregations: true
+  - role: acrleader
+    permission:
+      columns:
+      - id
+      - name
+      - product_code
+      - variant
+      filter: {}
+      allow_aggregations: true
+  - role: acrmobile
+    permission:
+      columns:
+      - id
+      - name
+      - product_code
+      - variant
+      filter: {}
+      allow_aggregations: true
+  - role: asm
+    permission:
+      columns:
+      - id
+      - name
+      - product_code
+      - variant
+      filter: {}
+      allow_aggregations: true
+  - role: exec
+    permission:
+      columns:
+      - id
+      - name
+      - product_code
+      - variant
+      - created_at
+      filter: {}
+      allow_aggregations: true
+  - role: staff
+    permission:
+      columns:
+      - name
+      - product_code
+      - variant
+      - created_at
+      - id
+      filter: {}
+  update_permissions:
+  - role: exec
+    permission:
+      columns:
+      - name
+      - product_code
+      - variant
+      filter: {}
+      check: null
+  - role: staff
+    permission:
+      columns:
+      - name
+      - product_code
+      - variant
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: exec
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: text_result
+  insert_permissions:
+  - role: acrmobile
+    permission:
+      check: {}
+      columns:
+      - result
+      backend_only: false
+  - role: exec
+    permission:
+      check: {}
+      columns:
+      - result
+      backend_only: false
+  - role: staff
+    permission:
+      check: {}
+      columns:
+      - result
+      backend_only: false
+  select_permissions:
+  - role: acrmobile
+    permission:
+      columns:
+      - result
+      filter: {}
+      allow_aggregations: true
+  - role: exec
+    permission:
+      columns:
+      - result
+      filter: {}
+  update_permissions:
+  - role: acrmobile
+    permission:
+      columns:
+      - result
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: acrmobile
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: user_pictures
+  object_relationships:
+  - name: account
+    using:
+      foreign_key_constraint_on: account_id
+  insert_permissions:
+  - role: acrfixed
+    permission:
+      check: {}
+      columns:
+      - account_id
+      - picture_url
+      backend_only: false
+  - role: acrleader
+    permission:
+      check: {}
+      columns:
+      - account_id
+      - picture_url
+      backend_only: false
+  - role: acrmobile
+    permission:
+      check: {}
+      columns:
+      - account_id
+      - picture_url
+      backend_only: false
+  - role: asm
+    permission:
+      check: {}
+      columns:
+      - account_id
+      - picture_url
+      backend_only: false
+  - role: exec
+    permission:
+      check: {}
+      columns:
+      - picture_url
+      - account_id
+      - id
+      backend_only: false
+  - role: staff
+    permission:
+      check: {}
+      columns:
+      - picture_url
+      - account_id
+      - id
+      backend_only: false
+  select_permissions:
+  - role: acrfixed
+    permission:
+      columns:
+      - picture_url
+      - account_id
+      - id
+      filter:
+        account_id:
+          _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  - role: acrleader
+    permission:
+      columns:
+      - id
+      - account_id
+      - picture_url
+      filter:
+        _or:
+        - account_id:
+            _eq: X-Hasura-User-Id
+        - account:
+            role:
+              _eq: acrmobile
+        - account:
+            role:
+              _eq: acrfixed
+      allow_aggregations: true
+  - role: acrmobile
+    permission:
+      columns:
+      - picture_url
+      - account_id
+      - id
+      filter:
+        account_id:
+          _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  - role: asm
+    permission:
+      columns:
+      - picture_url
+      - account_id
+      - id
+      filter:
+        _or:
+        - account_id:
+            _eq: X-Hasura-User-Id
+        - account:
+            role:
+              _eq: acrmobile
+        - account:
+            role:
+              _eq: acrfixed
+        - account:
+            role:
+              _eq: acrleader
+      allow_aggregations: true
+  - role: exec
+    permission:
+      columns:
+      - picture_url
+      - account_id
+      - id
+      filter: {}
+      allow_aggregations: true
+  - role: staff
+    permission:
+      columns:
+      - picture_url
+      - account_id
+      - id
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: acrfixed
+    permission:
+      columns:
+      - picture_url
+      filter:
+        account_id:
+          _eq: X-Hasura-User-Id
+      check:
+        account_id:
+          _eq: X-Hasura-User-Id
+  - role: acrleader
+    permission:
+      columns:
+      - picture_url
+      filter:
+        account_id:
+          _eq: X-Hasura-User-Id
+      check:
+        account_id:
+          _eq: X-Hasura-User-Id
+  - role: acrmobile
+    permission:
+      columns:
+      - picture_url
+      filter:
+        account_id:
+          _eq: X-Hasura-User-Id
+      check:
+        account_id:
+          _eq: X-Hasura-User-Id
+  - role: asm
+    permission:
+      columns:
+      - picture_url
+      filter:
+        account_id:
+          _eq: X-Hasura-User-Id
+      check:
+        account_id:
+          _eq: X-Hasura-User-Id
+  - role: exec
+    permission:
+      columns:
+      - picture_url
+      filter: {}
+      check: {}
+  - role: staff
+    permission:
+      columns:
+      - picture_url
+      filter: {}
+      check: {}
+  delete_permissions:
+  - role: exec
+    permission:
+      filter: {}
+  - role: staff
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: user_profiles
+  object_relationships:
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
+  - name: userById
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: users
+        column_mapping:
+          id: profile_id
+  insert_permissions:
+  - role: acrfixed
+    permission:
+      check: {}
+      columns:
+      - id
+      - user_id
+      - devices
+      backend_only: false
+  - role: acrleader
+    permission:
+      check: {}
+      columns:
+      - devices
+      - id
+      - user_id
+      backend_only: false
+  - role: acrmobile
+    permission:
+      check: {}
+      columns:
+      - devices
+      - id
+      - user_id
+      backend_only: false
+  - role: asm
+    permission:
+      check: {}
+      columns:
+      - devices
+      - id
+      - user_id
+      backend_only: false
+  - role: exec
+    permission:
+      check: {}
+      columns:
+      - devices
+      - id
+      - user_id
+      backend_only: false
+  - role: staff
+    permission:
+      check: {}
+      columns:
+      - devices
+      - id
+      - user_id
+      backend_only: false
+  select_permissions:
+  - role: acrfixed
+    permission:
+      columns:
+      - devices
+      - id
+      - user_id
+      filter:
+        user:
+          account_id:
+            _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  - role: acrleader
+    permission:
+      columns:
+      - devices
+      - id
+      - user_id
+      filter:
+        _or:
+        - user:
+            account_id:
+              _eq: X-Hasura-User-Id
+        - user:
+            account:
+              role:
+                _eq: acrmobile
+        - user:
+            account:
+              role:
+                _eq: acrfixed
+      allow_aggregations: true
+  - role: acrmobile
+    permission:
+      columns:
+      - devices
+      - id
+      - user_id
+      filter:
+        user:
+          account_id:
+            _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  - role: asm
+    permission:
+      columns:
+      - devices
+      - id
+      - user_id
+      filter:
+        _or:
+        - user:
+            account_id:
+              _eq: X-Hasura-User-Id
+        - user:
+            account:
+              role:
+                _eq: acrmobile
+        - user:
+            account:
+              role:
+                _eq: acrfixed
+        - user:
+            account:
+              role:
+                _eq: acrleader
+      allow_aggregations: true
+  - role: exec
+    permission:
+      columns:
+      - devices
+      - id
+      - user_id
+      filter: {}
+      allow_aggregations: true
+  - role: staff
+    permission:
+      columns:
+      - devices
+      - id
+      - user_id
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: acrfixed
+    permission:
+      columns:
+      - devices
+      filter:
+        user:
+          account_id:
+            _eq: X-Hasura-User-Id
+      check:
+        user:
+          account_id:
+            _eq: X-Hasura-User-Id
+  - role: acrleader
+    permission:
+      columns:
+      - devices
+      filter:
+        user:
+          account_id:
+            _eq: X-Hasura-User-Id
+      check:
+        user:
+          account_id:
+            _eq: X-Hasura-User-Id
+  - role: acrmobile
+    permission:
+      columns:
+      - devices
+      filter:
+        user:
+          account_id:
+            _eq: X-Hasura-User-Id
+      check:
+        user:
+          account_id:
+            _eq: X-Hasura-User-Id
+  - role: asm
+    permission:
+      columns:
+      - devices
+      filter:
+        user:
+          account_id:
+            _eq: X-Hasura-User-Id
+      check:
+        user:
+          account_id:
+            _eq: X-Hasura-User-Id
+  - role: exec
+    permission:
+      columns:
+      - devices
+      filter: {}
+      check: {}
+  - role: staff
+    permission:
+      columns:
+      - devices
+      filter: {}
+      check: {}
+  delete_permissions:
+  - role: exec
+    permission:
+      filter: {}
+  - role: staff
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: users
+  object_relationships:
+  - name: account
+    using:
+      foreign_key_constraint_on: account_id
+  - name: marketing_region
+    using:
+      foreign_key_constraint_on: marketing_region_id
+  - name: user_profile
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: user_profiles
+        column_mapping:
+          id: user_id
+  - name: userProfileByProfileId
+    using:
+      foreign_key_constraint_on: profile_id
+  array_relationships:
+  - name: contracts
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          schema: public
+          name: contracts
+  - name: distro_store_assignments
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          schema: public
+          name: distro_store_assignments
+  insert_permissions:
+  - role: acrfixed
+    permission:
+      check: {}
+      columns:
+      - account_id
+      - address
+      - birth_date
+      - government_id
+      - name
+      - profile_id
+      backend_only: false
+  - role: acrleader
+    permission:
+      check: {}
+      columns:
+      - account_id
+      - address
+      - birth_date
+      - government_id
+      - name
+      - profile_id
+      backend_only: false
+  - role: acrmobile
+    permission:
+      check: {}
+      columns:
+      - account_id
+      - address
+      - birth_date
+      - government_id
+      - name
+      - profile_id
+      backend_only: false
+  - role: asm
+    permission:
+      check: {}
+      columns:
+      - account_id
+      - address
+      - birth_date
+      - government_id
+      - name
+      - profile_id
+      backend_only: false
+  - role: exec
+    permission:
+      check: {}
+      columns:
+      - locked
+      - birth_date
+      - account_id
+      - address
+      - government_id
+      - name
+      - created_at
+      - last_modified
+      - contract_id
+      - id
+      - profile_id
+      backend_only: false
+  - role: staff
+    permission:
+      check: {}
+      columns:
+      - locked
+      - birth_date
+      - account_id
+      - address
+      - government_id
+      - name
+      - created_at
+      - last_modified
+      - contract_id
+      - id
+      - profile_id
+      backend_only: false
+  select_permissions:
+  - role: acrfixed
+    permission:
+      columns:
+      - account_id
+      - address
+      - birth_date
+      - contract_id
+      - created_at
+      - government_id
+      - id
+      - last_modified
+      - name
+      - profile_id
+      filter:
+        account_id:
+          _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  - role: acrleader
+    permission:
+      columns:
+      - locked
+      - birth_date
+      - address
+      - government_id
+      - name
+      - created_at
+      - last_modified
+      - account_id
+      - contract_id
+      - id
+      - profile_id
+      filter:
+        _or:
+        - account_id:
+            _eq: X-Hasura-User-Id
+        - account:
+            role:
+              _eq: acrmobile
+        - account:
+            role:
+              _eq: acrfixed
+      allow_aggregations: true
+  - role: acrmobile
+    permission:
+      columns:
+      - account_id
+      - address
+      - birth_date
+      - contract_id
+      - created_at
+      - government_id
+      - id
+      - last_modified
+      - name
+      - profile_id
+      filter:
+        account_id:
+          _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  - role: asm
+    permission:
+      columns:
+      - locked
+      - birth_date
+      - address
+      - government_id
+      - name
+      - created_at
+      - last_modified
+      - account_id
+      - contract_id
+      - id
+      - profile_id
+      filter:
+        _or:
+        - account_id:
+            _eq: X-Hasura-User-Id
+        - account:
+            role:
+              _eq: acrmobile
+        - account:
+            role:
+              _eq: acrfixed
+      allow_aggregations: true
+  - role: exec
+    permission:
+      columns:
+      - locked
+      - birth_date
+      - account_id
+      - address
+      - government_id
+      - name
+      - created_at
+      - last_modified
+      - contract_id
+      - id
+      - profile_id
+      filter: {}
+      allow_aggregations: true
+  - role: staff
+    permission:
+      columns:
+      - locked
+      - birth_date
+      - account_id
+      - address
+      - government_id
+      - name
+      - created_at
+      - last_modified
+      - contract_id
+      - id
+      - profile_id
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: acrfixed
+    permission:
+      columns:
+      - address
+      - birth_date
+      - name
+      filter:
+        account_id:
+          _eq: X-Hasura-User-Id
+      check:
+        account_id:
+          _eq: X-Hasura-User-Id
+  - role: acrleader
+    permission:
+      columns:
+      - address
+      - birth_date
+      - name
+      filter:
+        account_id:
+          _eq: X-Hasura-User-Id
+      check:
+        account_id:
+          _eq: X-Hasura-User-Id
+  - role: acrmobile
+    permission:
+      columns:
+      - address
+      - birth_date
+      - name
+      filter:
+        account_id:
+          _eq: X-Hasura-User-Id
+      check:
+        account_id:
+          _eq: X-Hasura-User-Id
+  - role: asm
+    permission:
+      columns:
+      - address
+      - birth_date
+      - name
+      filter:
+        account_id:
+          _eq: X-Hasura-User-Id
+      check:
+        account_id:
+          _eq: X-Hasura-User-Id
+  - role: exec
+    permission:
+      columns:
+      - account_id
+      - address
+      - birth_date
+      - contract_id
+      - created_at
+      - government_id
+      - id
+      - last_modified
+      - locked
+      - name
+      - profile_id
+      filter: {}
+      check: {}
+  - role: staff
+    permission:
+      columns:
+      - locked
+      - birth_date
+      - account_id
+      - address
+      - government_id
+      - name
+      - created_at
+      - last_modified
+      - contract_id
+      - id
+      - profile_id
+      filter: {}
+      check: {}
+  delete_permissions:
+  - role: exec
+    permission:
+      filter: {}
+  - role: staff
+    permission:
+      filter: {}

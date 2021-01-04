@@ -1,0 +1,10 @@
+---
+roles:
+  - name: weareinteractive.users
+  - name: geerlingguy.docker
+  - name: geerlingguy.security
+
+collections:
+  - name: https://github.com/dev-sec/ansible-collection-hardening
+    type: git
+    version: master

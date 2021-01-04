@@ -1,0 +1,644 @@
+[1;32mhcloud.main: output will be in this color.[0m
+
+[1;32m==> hcloud.main: Creating temporary ssh key for server...[0m
+[1;32m==> hcloud.main: Creating server...[0m
+[1;32m==> hcloud.main: Using ssh communicator to connect: 116.203.232.239[0m
+[1;32m==> hcloud.main: Waiting for SSH to become available...[0m
+[1;32m==> hcloud.main: Connected to SSH![0m
+[1;32m==> hcloud.main: Provisioning with shell script: /tmp/packer-shell790289889[0m
+[1;31m==> hcloud.main: + timedatectl set-timezone UTC[0m
+[1;31m==> hcloud.main: + localectl set-locale LANG=en_US.UTF-8[0m
+[1;32m==> hcloud.main: Provisioning with Ansible...[0m
+[0;32m    hcloud.main: Setting up proxy adapter for Ansible....[0m
+[0;32m    hcloud.main: Executing Ansible Galaxy[0m
+[0;32m    hcloud.main: Starting galaxy role install process[0m
+[0;32m    hcloud.main: [WARNING]: - weareinteractive.users (1.17.0) is already installed - use --force[0m
+[0;32m    hcloud.main: Starting galaxy collection install process[0m
+[0;32m    hcloud.main: to change version to unspecified[0m
+[0;32m    hcloud.main: [WARNING]: - geerlingguy.docker (2.9.0) is already installed - use --force to[0m
+[0;32m    hcloud.main: Process install dependency map[0m
+[0;32m    hcloud.main: change version to unspecified[0m
+[0;32m    hcloud.main: [WARNING]: - geerlingguy.security (2.0.1) is already installed - use --force to[0m
+[0;32m    hcloud.main: change version to unspecified[0m
+[0;32m    hcloud.main: Starting collection install process[0m
+[0;32m    hcloud.main: Skipping 'devsec.hardening' as it is already installed[0m
+[0;32m    hcloud.main: Executing Ansible Galaxy[0m
+[0;32m    hcloud.main: Starting galaxy collection install process[0m
+[0;32m    hcloud.main: Process install dependency map[0m
+[0;32m    hcloud.main: Starting collection install process[0m
+[0;32m    hcloud.main: Skipping 'devsec.hardening' as it is already installed[0m
+[1;32m==> hcloud.main: Executing Ansible: ansible-playbook -e packer_build_name="main" -e packer_builder_type=hcloud --ssh-extra-args '-o IdentitiesOnly=yes' -e @ansible/extra_vars.yml --vault-password-file ansible/.passwordfile -e ansible_ssh_private_key_file=/tmp/ansible-key002151280 -i /tmp/packer-provisioner-ansible079055887 /home/franksn/workspace/hasura/sanfood-hcloud/packer/ansible/playbooks/init.yml[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: PLAY [default] *****************************************************************[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [Gathering Facts] *********************************************************[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [weareinteractive.users : Adding primary group] ***************************[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [weareinteractive.users : Adding secondary groups] ************************[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [weareinteractive.users : Configure users] ********************************[0m
+[0;32m    hcloud.main: included: /home/franksn/.ansible/roles/weareinteractive.users/tasks/manage_user.yml for default => (item={'username': 'alex', 'password': '$6$jqaKaHu2aMmRdrBl$7SJc30OspJFxMucislqfhKY2WjyIfCw.B3x8qeyx08Y8Nre8XqTmRXUXL0dWzrWdQK3yEJe9tVLwYFAe4CWWh.', 'group': 'alex', 'shell': '/bin/bash', 'home_create': True, 'authorized_keys': ['ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMRPCJl5LtiI53yqaFtiUpiFD9tPKBQH4A5DC3nLa3ox franksn@dell', 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHV4bT5pkGTMSXqo/fJzoumbdUyiRUejM0YnjVkT1oi/ winwisely268@gmail.com', 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC/viC4KXAxByXGJ+4iQUjponIcEZZEMAGhe5MWoZwcr gutterbacon@protonmail.com']})[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [weareinteractive.users : Adding user 'alex' to the system] ***************[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [weareinteractive.users : Setting user's home permission] *****************[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [weareinteractive.users : Adding user's .ssh directory] *******************[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [weareinteractive.users : Adding user's private key] **********************[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [weareinteractive.users : Adding user's private keys] *********************[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [weareinteractive.users : Adding user's authorized keys] ******************[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [weareinteractive.users : Adding user's home files] ***********************[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [weareinteractive.users : Removing users] *********************************[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [Ensure group "alex" exists with correct gid] *****************************[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: PLAY RECAP *********************************************************************[0m
+[0;32m    hcloud.main: default                    : ok=7    changed=4    unreachable=0    failed=0    skipped=6    rescued=0    ignored=0[0m
+[0;32m    hcloud.main:[0m
+[1;32m==> hcloud.main: Provisioning with Ansible...[0m
+[0;32m    hcloud.main: Setting up proxy adapter for Ansible....[0m
+[1;32m==> hcloud.main: Executing Ansible: ansible-playbook -e packer_build_name="main" -e packer_builder_type=hcloud --ssh-extra-args '-o IdentitiesOnly=yes' -e @ansible/extra_vars.yml --vault-password-file ansible/.passwordfile -e ansible_ssh_private_key_file=/tmp/ansible-key411601026 -i /tmp/packer-provisioner-ansible913550841 /home/franksn/workspace/hasura/sanfood-hcloud/packer/ansible/playbooks/sudoers.yml[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: PLAY [default] *****************************************************************[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [Gathering Facts] *********************************************************[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [Set includedir in sudoers] ***********************************************[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [Add user to sudoers.d] ***************************************************[0m
+[0;32m    hcloud.main: changed: [default] => (item=alex)[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: PLAY RECAP *********************************************************************[0m
+[0;32m    hcloud.main: default                    : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0[0m
+[0;32m    hcloud.main:[0m
+[1;32m==> hcloud.main: Provisioning with Ansible...[0m
+[0;32m    hcloud.main: Setting up proxy adapter for Ansible....[0m
+[1;32m==> hcloud.main: Executing Ansible: ansible-playbook -e packer_build_name="main" -e packer_builder_type=hcloud --ssh-extra-args '-o IdentitiesOnly=yes' -e @ansible/extra_vars.yml --vault-password-file ansible/.passwordfile -e ansible_ssh_private_key_file=/tmp/ansible-key513957855 -i /tmp/packer-provisioner-ansible025678258 /home/franksn/workspace/hasura/sanfood-hcloud/packer/ansible/playbooks/post_init.yml[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: PLAY [default] *****************************************************************[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [Gathering Facts] *********************************************************[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [pre : Make sure universe repository is enabled] **************************[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [pre : Update and upgrade apt packages] ***********************************[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main: [WARNING]: The value "True" (type bool) was converted to "'True'" (type[0m
+[0;32m    hcloud.main: string). If this does not look like what you expect, quote the entire value to[0m
+[0;32m    hcloud.main: ensure it does not change.[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [Install prequisites] *****************************************************[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [Copy dotfiles to remote] *************************************************[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [Extract dotfiles] ********************************************************[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [dotfiles : Create $HOME/bin directory] ***********************************[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [dotfiles : Create $HOME/.local/share directory] **************************[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [dotfiles : Copy install_dots.sh to remote bin] ***************************[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [dotfiles : Remove distro's bashrc and profile] ***************************[0m
+[0;32m    hcloud.main: changed: [default] => (item=/home/alex/.bashrc)[0m
+[0;32m    hcloud.main: ok: [default] => (item=/home/alex/.bash_profile)[0m
+[0;32m    hcloud.main: changed: [default] => (item=/home/alex/.profile)[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [Install dotfiles] ********************************************************[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [dotfiles : Change file ownership, group and permissions for user's directory] ***[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [service : copy docker-compose to remote] *********************************[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [Enable caddy's debian repo] **********************************************[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [Install caddy] ***********************************************************[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : Fetch OS dependent variables] ************[0m
+[0;32m    hcloud.main: ok: [default] => (item=/home/franksn/.ansible/collections/ansible_collections/devsec/hardening/roles/os_hardening/vars/Debian.yml)[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : Set OS dependent variables, if not already defined by user] ***[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'os_packages_pam_ccreds', 'value': 'libpam-ccreds'})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'os_packages_pam_passwdqc', 'value': 'libpam-passwdqc'})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'os_packages_pam_cracklib', 'value': 'libpam-cracklib'})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'os_nologin_shell_path', 'value': '/usr/sbin/nologin'})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'os_shadow_perms', 'value': {'owner': 'root', 'group': 'shadow', 'mode': '0640'}})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'os_passwd_perms', 'value': {'owner': 'root', 'group': 'root', 'mode': '0644'}})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'os_env_umask', 'value': '027'})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'os_auth_uid_min', 'value': 1000})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'os_auth_gid_min', 'value': 1000})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'os_auth_sys_uid_min', 'value': 100})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'os_auth_sys_uid_max', 'value': 999})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'os_auth_sys_gid_min', 'value': 100})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'os_auth_sys_gid_max', 'value': 999})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'os_useradd_mail_dir', 'value': '/var/mail'})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'modprobe_package', 'value': 'kmod'})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'auditd_package', 'value': 'auditd'})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'tally2_path', 'value': '/usr/share/pam-configs/tally2'})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'passwdqc_path', 'value': '/usr/share/pam-configs/passwdqc'})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'hidepid_option', 'value': '2'})[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : install auditd package | package-08] *****[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : configure auditd | package-08] ***********[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : create limits.d-directory if it does not exist | sysctl-31a, sysctl-31b] ***[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : create additional limits config file -> 10.hardcore.conf | sysctl-31a, sysctl-31b] ***[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : set 10.hardcore.conf perms to 0400 and root ownership] ***[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : remove 10.hardcore.conf config file] *****[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : create login.defs | os-05, os-05b] *******[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : find files with write-permissions for group] ***[0m
+[0;32m    hcloud.main: ok: [default] => (item=/usr/local/sbin)[0m
+[0;32m    hcloud.main: ok: [default] => (item=/usr/local/bin)[0m
+[0;32m    hcloud.main: ok: [default] => (item=/usr/sbin)[0m
+[0;32m    hcloud.main: ok: [default] => (item=/usr/bin)[0m
+[0;32m    hcloud.main: ok: [default] => (item=/sbin)[0m
+[0;32m    hcloud.main: ok: [default] => (item=/bin)[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : minimize access on found files] **********[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : change shadow ownership to root and mode to 0600 | os-02] ***[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : change passwd ownership to root and mode to 0644 | os-03] ***[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : change su-binary to only be accessible to user and group root] ***[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : set option hidepid for proc filesystem] ***[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : update pam on Debian systems] ************[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : remove pam ccreds to disable password caching] ***[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : remove pam_cracklib, because it does not play nice with passwdqc] ***[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : install the package for strong password checking] ***[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : configure passwdqc] **********************[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : remove passwdqc] *************************[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : install tally2] **************************[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : configure tally2] ************************[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : delete tally2 when retries is 0] *********[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : remove pam_cracklib, because it does not play nice with passwdqc] ***[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : install the package for strong password checking] ***[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : remove passwdqc] *************************[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : configure passwdqc and tally via central system-auth confic] ***[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : Gather package facts] ********************[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : NSA 2.3.3.5 Upgrade Password Hashing Algorithm to SHA-512] ***[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : install modprobe to disable filesystems | os-10] ***[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : check if efi is installed] ***************[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : remove vfat from fs-list if efi is used] ***[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : remove used filesystems from fs-list] ****[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : disable unused filesystems | os-10] ******[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : add pinerolo_profile.sh to profile.d] ****[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : remove pinerolo_profile.sh from profile.d] ***[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : create securetty] ************************[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : remove suid/sgid bit from binaries in blacklist | os-06] ***[0m
+[0;32m    hcloud.main: ok: [default] => (item=/usr/bin/rcp)[0m
+[0;32m    hcloud.main: ok: [default] => (item=/usr/bin/rlogin)[0m
+[0;32m    hcloud.main: ok: [default] => (item=/usr/bin/rsh)[0m
+[0;32m    hcloud.main: ok: [default] => (item=/usr/libexec/openssh/ssh-keysign)[0m
+[0;32m    hcloud.main: changed: [default] => (item=/usr/lib/openssh/ssh-keysign)[0m
+[0;32m    hcloud.main: ok: [default] => (item=/sbin/netreport)[0m
+[0;32m    hcloud.main: ok: [default] => (item=/usr/sbin/usernetctl)[0m
+[0;32m    hcloud.main: ok: [default] => (item=/usr/sbin/userisdnctl)[0m
+[0;32m    hcloud.main: ok: [default] => (item=/usr/sbin/pppd)[0m
+[0;32m    hcloud.main: ok: [default] => (item=/usr/bin/lockfile)[0m
+[0;32m    hcloud.main: ok: [default] => (item=/usr/bin/mail-lock)[0m
+[0;32m    hcloud.main: ok: [default] => (item=/usr/bin/mail-unlock)[0m
+[0;32m    hcloud.main: ok: [default] => (item=/usr/bin/mail-touchlock)[0m
+[0;32m    hcloud.main: ok: [default] => (item=/usr/bin/dotlockfile)[0m
+[0;32m    hcloud.main: ok: [default] => (item=/usr/bin/arping)[0m
+[0;32m    hcloud.main: ok: [default] => (item=/usr/sbin/uuidd)[0m
+[0;32m    hcloud.main: ok: [default] => (item=/usr/bin/mtr)[0m
+[0;32m    hcloud.main: ok: [default] => (item=/usr/lib/evolution/camel-lock-helper-1.2)[0m
+[0;32m    hcloud.main: ok: [default] => (item=/usr/lib/pt_chown)[0m
+[0;32m    hcloud.main: ok: [default] => (item=/usr/lib/eject/dmcrypt-get-device)[0m
+[0;32m    hcloud.main: ok: [default] => (item=/usr/lib/mc/cons.saver)[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : find binaries with suid/sgid set | os-06] ***[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : gather files from which to remove suids/sgids and remove system white-listed files | os-06] ***[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : remove suid/sgid bit from all binaries except in system and user whitelist | os-06] ***[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : protect sysctl.conf] *********************[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : set Daemon umask, do config for rhel-family | NSA 2.2.4.1] ***[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : install initramfs-tools] *****************[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : rebuild initramfs with starting pack of modules, if module loading at runtime is disabled] ***[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : create a combined sysctl-dict if overwrites are defined] ***[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : Change various sysctl-settings, look at the sysctl-vars file for documentation] ***[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv4.ip_forward', 'value': 0})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv6.conf.all.forwarding', 'value': 0})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv6.conf.all.accept_ra', 'value': 0})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv6.conf.default.accept_ra', 'value': 0})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv4.conf.all.rp_filter', 'value': 1})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv4.conf.default.rp_filter', 'value': 1})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv4.icmp_echo_ignore_broadcasts', 'value': 1})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv4.icmp_ignore_bogus_error_responses', 'value': 1})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv4.icmp_ratelimit', 'value': 100})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv4.icmp_ratemask', 'value': 88089})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv6.conf.all.disable_ipv6', 'value': 1})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv4.tcp_timestamps', 'value': 0})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv4.conf.all.arp_ignore', 'value': 1})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv4.conf.all.arp_announce', 'value': 2})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv4.tcp_rfc1337', 'value': 1})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv4.conf.all.shared_media', 'value': 1})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv4.conf.default.shared_media', 'value': 1})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv4.conf.all.accept_source_route', 'value': 0})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv4.conf.default.accept_source_route', 'value': 0})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv4.conf.default.accept_redirects', 'value': 0})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv4.conf.all.accept_redirects', 'value': 0})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv4.conf.all.secure_redirects', 'value': 0})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv4.conf.default.secure_redirects', 'value': 0})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv6.conf.default.accept_redirects', 'value': 0})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv6.conf.all.accept_redirects', 'value': 0})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv4.conf.all.send_redirects', 'value': 0})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv4.conf.default.send_redirects', 'value': 0})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv4.conf.all.log_martians', 'value': 1})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv4.conf.default.log_martians', 'value': 1})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv6.conf.default.router_solicitations', 'value': 0})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv6.conf.default.accept_ra_rtr_pref', 'value': 0})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv6.conf.default.accept_ra_pinfo', 'value': 0})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv6.conf.default.accept_ra_defrtr', 'value': 0})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv6.conf.default.autoconf', 'value': 0})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv6.conf.default.dad_transmits', 'value': 0})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'net.ipv6.conf.default.max_addresses', 'value': 1})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'kernel.sysrq', 'value': 0})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'fs.suid_dumpable', 'value': 0})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'kernel.randomize_va_space', 'value': 2})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'kernel.core_uses_pid', 'value': 1})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'kernel.yama.ptrace_scope', 'value': 1})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'vm.mmap_min_addr', 'value': 65536})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'fs.protected_hardlinks', 'value': 1})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'fs.protected_symlinks', 'value': 1})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'vm.mmap_rnd_bits', 'value': 32})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'vm.mmap_rnd_compat_bits', 'value': 16})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'kernel.kptr_restrict', 'value': 2})[0m
+[0;32m    hcloud.main: changed: [default] => (item={'key': 'kernel.kexec_load_disabled', 'value': 1})[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : Change various sysctl-settings on rhel6-hosts or older, look at the sysctl-vars file for documentation] ***[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : Apply ufw defaults] **********************[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : get UID_MIN from login.defs] *************[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : calculate UID_MAX from UID_MIN by substracting 1] ***[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : set UID_MAX on Debian-systems if no login.defs exist] ***[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : set UID_MAX on other systems if no login.defs exist] ***[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : get all system accounts] *****************[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : remove always ignored system accounts from list] ***[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : change system accounts not on the user provided ignore-list] ***[0m
+[0;32m    hcloud.main: ok: [default] => (item=daemon)[0m
+[0;32m    hcloud.main: ok: [default] => (item=bin)[0m
+[0;32m    hcloud.main: ok: [default] => (item=sys)[0m
+[0;32m    hcloud.main: ok: [default] => (item=games)[0m
+[0;32m    hcloud.main: ok: [default] => (item=man)[0m
+[0;32m    hcloud.main: ok: [default] => (item=lp)[0m
+[0;32m    hcloud.main: ok: [default] => (item=mail)[0m
+[0;32m    hcloud.main: ok: [default] => (item=news)[0m
+[0;32m    hcloud.main: ok: [default] => (item=uucp)[0m
+[0;32m    hcloud.main: ok: [default] => (item=proxy)[0m
+[0;32m    hcloud.main: ok: [default] => (item=www-data)[0m
+[0;32m    hcloud.main: ok: [default] => (item=backup)[0m
+[0;32m    hcloud.main: ok: [default] => (item=list)[0m
+[0;32m    hcloud.main: ok: [default] => (item=irc)[0m
+[0;32m    hcloud.main: ok: [default] => (item=gnats)[0m
+[0;32m    hcloud.main: ok: [default] => (item=systemd-network)[0m
+[0;32m    hcloud.main: ok: [default] => (item=systemd-resolve)[0m
+[0;32m    hcloud.main: ok: [default] => (item=systemd-timesync)[0m
+[0;32m    hcloud.main: ok: [default] => (item=messagebus)[0m
+[0;32m    hcloud.main: ok: [default] => (item=syslog)[0m
+[0;32m    hcloud.main: ok: [default] => (item=_apt)[0m
+[0;32m    hcloud.main: ok: [default] => (item=uuidd)[0m
+[0;32m    hcloud.main: ok: [default] => (item=tcpdump)[0m
+[0;32m    hcloud.main: ok: [default] => (item=sshd)[0m
+[0;32m    hcloud.main: changed: [default] => (item=systemd-coredump)[0m
+[0;32m    hcloud.main: changed: [default] => (item=pollinate)[0m
+[0;32m    hcloud.main: changed: [default] => (item=caddy)[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : Get user accounts | os-09] ***************[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : delete rhosts-files from system | os-09] ***[0m
+[0;32m    hcloud.main: ok: [default] => (item=root)[0m
+[0;32m    hcloud.main: ok: [default] => (item=daemon)[0m
+[0;32m    hcloud.main: ok: [default] => (item=bin)[0m
+[0;32m    hcloud.main: ok: [default] => (item=sys)[0m
+[0;32m    hcloud.main: ok: [default] => (item=sync)[0m
+[0;32m    hcloud.main: ok: [default] => (item=games)[0m
+[0;32m    hcloud.main: ok: [default] => (item=man)[0m
+[0;32m    hcloud.main: ok: [default] => (item=lp)[0m
+[0;32m    hcloud.main: ok: [default] => (item=mail)[0m
+[0;32m    hcloud.main: ok: [default] => (item=news)[0m
+[0;32m    hcloud.main: ok: [default] => (item=uucp)[0m
+[0;32m    hcloud.main: ok: [default] => (item=proxy)[0m
+[0;32m    hcloud.main: ok: [default] => (item=www-data)[0m
+[0;32m    hcloud.main: ok: [default] => (item=backup)[0m
+[0;32m    hcloud.main: ok: [default] => (item=list)[0m
+[0;32m    hcloud.main: ok: [default] => (item=irc)[0m
+[0;32m    hcloud.main: ok: [default] => (item=gnats)[0m
+[0;32m    hcloud.main: ok: [default] => (item=nobody)[0m
+[0;32m    hcloud.main: ok: [default] => (item=systemd-network)[0m
+[0;32m    hcloud.main: ok: [default] => (item=systemd-resolve)[0m
+[0;32m    hcloud.main: ok: [default] => (item=systemd-timesync)[0m
+[0;32m    hcloud.main: ok: [default] => (item=messagebus)[0m
+[0;32m    hcloud.main: ok: [default] => (item=syslog)[0m
+[0;32m    hcloud.main: ok: [default] => (item=_apt)[0m
+[0;32m    hcloud.main: ok: [default] => (item=uuidd)[0m
+[0;32m    hcloud.main: ok: [default] => (item=tcpdump)[0m
+[0;32m    hcloud.main: ok: [default] => (item=sshd)[0m
+[0;32m    hcloud.main: ok: [default] => (item=systemd-coredump)[0m
+[0;32m    hcloud.main: ok: [default] => (item=pollinate)[0m
+[0;32m    hcloud.main: ok: [default] => (item=alex)[0m
+[0;32m    hcloud.main: ok: [default] => (item=caddy)[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : delete hosts.equiv from system | os-01] ***[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : delete .netrc-files from system | os-09] ***[0m
+[0;32m    hcloud.main: ok: [default] => (item=root)[0m
+[0;32m    hcloud.main: ok: [default] => (item=daemon)[0m
+[0;32m    hcloud.main: ok: [default] => (item=bin)[0m
+[0;32m    hcloud.main: ok: [default] => (item=sys)[0m
+[0;32m    hcloud.main: ok: [default] => (item=sync)[0m
+[0;32m    hcloud.main: ok: [default] => (item=games)[0m
+[0;32m    hcloud.main: ok: [default] => (item=man)[0m
+[0;32m    hcloud.main: ok: [default] => (item=lp)[0m
+[0;32m    hcloud.main: ok: [default] => (item=mail)[0m
+[0;32m    hcloud.main: ok: [default] => (item=news)[0m
+[0;32m    hcloud.main: ok: [default] => (item=uucp)[0m
+[0;32m    hcloud.main: ok: [default] => (item=proxy)[0m
+[0;32m    hcloud.main: ok: [default] => (item=www-data)[0m
+[0;32m    hcloud.main: ok: [default] => (item=backup)[0m
+[0;32m    hcloud.main: ok: [default] => (item=list)[0m
+[0;32m    hcloud.main: ok: [default] => (item=irc)[0m
+[0;32m    hcloud.main: ok: [default] => (item=gnats)[0m
+[0;32m    hcloud.main: ok: [default] => (item=nobody)[0m
+[0;32m    hcloud.main: ok: [default] => (item=systemd-network)[0m
+[0;32m    hcloud.main: ok: [default] => (item=systemd-resolve)[0m
+[0;32m    hcloud.main: ok: [default] => (item=systemd-timesync)[0m
+[0;32m    hcloud.main: ok: [default] => (item=messagebus)[0m
+[0;32m    hcloud.main: ok: [default] => (item=syslog)[0m
+[0;32m    hcloud.main: ok: [default] => (item=_apt)[0m
+[0;32m    hcloud.main: ok: [default] => (item=uuidd)[0m
+[0;32m    hcloud.main: ok: [default] => (item=tcpdump)[0m
+[0;32m    hcloud.main: ok: [default] => (item=sshd)[0m
+[0;32m    hcloud.main: ok: [default] => (item=systemd-coredump)[0m
+[0;32m    hcloud.main: ok: [default] => (item=pollinate)[0m
+[0;32m    hcloud.main: ok: [default] => (item=alex)[0m
+[0;32m    hcloud.main: ok: [default] => (item=caddy)[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : remove unused repositories] **************[0m
+[0;32m    hcloud.main: skipping: [default] => (item=CentOS-Debuginfo)[0m
+[0;32m    hcloud.main: skipping: [default] => (item=CentOS-Media)[0m
+[0;32m    hcloud.main: skipping: [default] => (item=CentOS-Vault)[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : get yum-repository-files] ****************[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : activate gpg-check for yum-repository-files] ***[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : activate gpg-check for config files] *****[0m
+[0;32m    hcloud.main: skipping: [default] => (item=/etc/yum.conf)[0m
+[0;32m    hcloud.main: skipping: [default] => (item=/etc/dnf/dnf.conf)[0m
+[0;32m    hcloud.main: skipping: [default] => (item=/etc/yum/pluginconf.d/rhnplugin.conf)[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : remove deprecated or insecure packages | package-01 - package-09] ***[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : remove deprecated or insecure packages | package-01 - package-09] ***[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.os_hardening : configure selinux | selinux-01] **********[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : include_tasks] **************************[0m
+[0;32m    hcloud.main: included: /home/franksn/.ansible/collections/ansible_collections/devsec/hardening/roles/ssh_hardening/tasks/hardening.yml for default[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : Fetch OS dependent variables] ***********[0m
+[0;32m    hcloud.main: ok: [default] => (item=/home/franksn/.ansible/collections/ansible_collections/devsec/hardening/roles/ssh_hardening/vars/Debian.yml)[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : Set OS dependent variables, if not already defined by user] ***[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'sshd_path', 'value': '/usr/sbin/sshd'})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'ssh_host_keys_dir', 'value': '/etc/ssh'})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'sshd_service_name', 'value': 'ssh'})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'ssh_owner', 'value': 'root'})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'ssh_group', 'value': 'root'})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'ssh_selinux_packages', 'value': ['policycoreutils-python', 'checkpolicy']})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'ssh_kerberos_support', 'value': True})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'ssh_pam_support', 'value': True})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'sshd_moduli_file', 'value': '/etc/ssh/moduli'})[0m
+[0;32m    hcloud.main: ok: [default] => (item={'key': 'sshd_disable_crypto_policy', 'value': False})[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : get openssh-version] ********************[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : parse openssh-version] ******************[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : set default for ssh_host_key_files if not supplied] ***[0m
+[0;32m    hcloud.main: included: /home/franksn/.ansible/collections/ansible_collections/devsec/hardening/roles/ssh_hardening/tasks/crypto_hostkeys.yml for default[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : set hostkeys according to openssh-version if openssh >= 5.3] ***[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : set hostkeys according to openssh-version if openssh >= 6.0] ***[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : set hostkeys according to openssh-version if openssh >= 6.3] ***[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : set default for ssh_macs if not supplied] ***[0m
+[0;32m    hcloud.main: included: /home/franksn/.ansible/collections/ansible_collections/devsec/hardening/roles/ssh_hardening/tasks/crypto_macs.yml for default[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : set macs according to openssh-version if openssh >= 5.3] ***[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : set macs for Enterprise Linux >= 6.5 (openssh 5.3 with backports)] ***[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : set macs according to openssh-version if openssh >= 5.9] ***[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : set macs according to openssh-version if openssh >= 6.6] ***[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : set macs according to openssh-version if openssh >= 7.6] ***[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : set default for ssh_ciphers if not supplied] ***[0m
+[0;32m    hcloud.main: included: /home/franksn/.ansible/collections/ansible_collections/devsec/hardening/roles/ssh_hardening/tasks/crypto_ciphers.yml for default[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : set ciphers according to openssh-version if openssh >= 5.3] ***[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : set ciphers according to openssh-version if openssh >= 6.6] ***[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : set default for ssh_kex if not supplied] ***[0m
+[0;32m    hcloud.main: included: /home/franksn/.ansible/collections/ansible_collections/devsec/hardening/roles/ssh_hardening/tasks/crypto_kex.yml for default[0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : set kex according to openssh-version if openssh >= 5.9] ***[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : set kex according to openssh-version if openssh >= 6.6] ***[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : set kex according to openssh-version if openssh >= 8.0] ***[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : create revoked_keys and set permissions to root/600] ***[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : create sshd_config and set permissions to root/600] ***[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : disable dynamic MOTD] *******************[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : create ssh_config and set permissions to root/644] ***[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : check if /etc/ssh/moduli contains weak DH parameters] ***[0m
+[0;32m    hcloud.main: ok: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : remove all small primes] ****************[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : include tasks to setup ca keys and principals] ***[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : include selinux specific tasks] *********[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : gather package facts] *******************[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: TASK [devsec.hardening.ssh_hardening : disable SSH server CRYPTO_POLICY] *******[0m
+[0;32m    hcloud.main: skipping: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: RUNNING HANDLER [devsec.hardening.os_hardening : update-initramfs] *************[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: RUNNING HANDLER [devsec.hardening.ssh_hardening : restart sshd] ****************[0m
+[0;32m    hcloud.main: changed: [default][0m
+[0;32m    hcloud.main:[0m
+[0;32m    hcloud.main: PLAY RECAP *********************************************************************[0m
+[0;32m    hcloud.main: default                    : ok=85   changed=38   unreachable=0    failed=0    skipped=32   rescued=0    ignored=0[0m
+[0;32m    hcloud.main:[0m
+[1;32m==> hcloud.main: Shutting down server...[0m
+[1;32m==> hcloud.main: Creating snapshot ...[0m
+[1;32m==> hcloud.main: This can take some time[0m

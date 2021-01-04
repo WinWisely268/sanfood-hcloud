@@ -1,0 +1,6 @@
+---
+- name: copy docker-compose to remote
+  copy:
+    src: docker-compose.yml
+    owner: '{{ hasura_user_name }}'
+    dest: '{{ hasura_user_dir }}/docker-compose.yml'

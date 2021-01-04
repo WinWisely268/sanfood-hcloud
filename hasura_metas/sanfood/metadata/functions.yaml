@@ -1,0 +1,9 @@
+- function:
+    schema: public
+    name: get_session_role
+- function:
+    schema: public
+    name: search_product_categories
+- function:
+    schema: public
+    name: search_products

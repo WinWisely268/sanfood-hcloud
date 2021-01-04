@@ -1,0 +1,21 @@
+---
+#- hosts: gcn
+- hosts: default
+  collections:
+    - devsec.hardening
+  vars:
+    ssh_custom_options:
+      - "Include /etc/ssh/ssh_config.d/*"
+    sshd_custom_options:
+      - "AcceptEnv LANG"
+    dotfiles_user_dir: "/home/alex"
+    dotfiles_user_name: "alex"
+    hasura_user_dir: "/home/alex"
+    hasura_user_name: "alex"
+  roles:
+    - pre
+    - dotfiles
+    - service
+    - caddy
+    - { role: os_hardening, become: yes }
+    - { role: ssh_hardening, become: yes }

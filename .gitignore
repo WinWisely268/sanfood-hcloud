@@ -1,0 +1,4 @@
+/packer/packer.auto.pkrvars.hcl
+/packer/ansible/.passwordfile
+/docker-compose.yml
+/packer/ansible/playbooks/roles/service/files/docker-compose.yml
